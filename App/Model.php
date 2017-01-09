@@ -14,6 +14,20 @@ abstract class Model
         return $db->query($sql, [], static::class);
     }
 
+    public static function findById($id = null)
+    {
+        $db = new Db();
+        $sql = 'SELECT * FROM ' . static::$table . ' WHERE id=:id';
+        return $db->query($sql, ['id' => $id], static::class)[0];
+    }
+
+    public static function last(int $number)
+    {
+        $db = new Db();
+        $sql = 'SELECT * FROM ' . static::$table . ' ORDER BY id DESC LIMIT ' . $number;
+        return $db->query($sql, [], static::class);
+    }
+
     public static function countAll()
     {
         $db = new Db();
