@@ -23,7 +23,7 @@ abstract class Model
             static::class)[0];
     }
 
-    public static function FindRecords(int $number, int $offset = 0)
+    public static function findRecords(int $number, int $offset = 0)
     {
         $db = new Db();
         $sql = 'SELECT * FROM ' . static::$table . ' ORDER BY id DESC LIMIT ' . $offset . ', ' . $number;
