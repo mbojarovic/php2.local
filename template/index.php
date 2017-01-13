@@ -8,6 +8,7 @@
     <title>Php2, 1 урок</title>
 </head>
 <body>
+<?php //var_dump($data); ?>
 
 <?php foreach ($data as $article): ?>
 

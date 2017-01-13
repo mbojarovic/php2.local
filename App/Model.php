@@ -19,14 +19,13 @@ abstract class Model
         $db = new Db();
         $sql = 'SELECT * FROM ' . static::$table . ' WHERE id=:id';
         return $db->query($sql,
-            ['id' => $id],
-            static::class)[0];
+            ['id' => $id], static::class)[0];
     }
 
-    public static function findRecords(int $number = 3, int $offset = 0)
+    public static function findRecords(int $limit = 3, int $offset = 0)
     {
         $db = new Db();
-        $sql = 'SELECT * FROM ' . static::$table . ' ORDER BY id DESC LIMIT ' . $offset . ', ' . $number;
+        $sql = 'SELECT * FROM ' . static::$table . ' ORDER BY id DESC LIMIT ' . $offset . ', ' . $limit;
         return $db->query($sql, [], static::class);
     }
 
@@ -37,4 +36,21 @@ abstract class Model
         return (int)$db->query($sql, [], static::class)[0]->num;
     }
 
+    public function update()
+    {
+        $sets = [];
+        $data = [];
+        foreach ($this as $key => $value) {
+            $data[':' . $key] = $value;
+            if ('id' == $key) {
+                continue;
+            }
+            $sets[] = $key . '=:' . $key;
+        }
+        $db = new Db();
+        $sql = 'UPDATE ' . static::$table . ' 
+        SET ' . implode(',', $sets) . ' 
+        WHERE id=:id';
+        return $db->execute($sql, $data);
+    }
 }
