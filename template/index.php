@@ -9,9 +9,9 @@
 </head>
 <body>
 
-<?php foreach ($data as $article): ?>
-    <h1><a href="/article.php?id=<?php echo $article->id; ?>"><?php echo $article->title; ?></a></h1>
-<article><?php echo $article->text; ?></article>
+<?php foreach ($article as $articles): ?>
+    <h1><a href="/article.php?id=<?php echo $articles->id; ?>"><?php echo $articles->title; ?></a></h1>
+<article><?php echo $articles->text; ?></article>
 
 <?php endforeach ?>
 

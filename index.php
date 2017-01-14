@@ -1,9 +1,6 @@
 <?php
 require __DIR__ . '/autoload.php';
 
-$data = \App\Models\Article::findRecords();
-
-$ordering = new \App\Ordering();
-$ordering->order(new \App\Models\Fruit());
+$article = \App\Models\Article::findAll();
 
 include __DIR__ . '/template/index.php';

@@ -9,8 +9,8 @@
 </head>
 <body>
 
-    <h1><?php echo $data->title; ?></a></h1>
-    <article><?php echo $data->text; ?></article>
+    <h1><?php echo $article->title; ?></a></h1>
+    <article><?php echo $article->text; ?></article>
 
 </body>
 </html>

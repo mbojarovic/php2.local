@@ -36,6 +36,26 @@ abstract class Model
         return (int)$db->query($sql, [], static::class)[0]->num;
     }
 
+    public function create()
+    {
+        $sets = [];
+        $sets1 = [];
+        $data = [];
+        foreach ($this as $key => $value) {
+           if ('id' == $key) {
+                continue;
+            }
+            $sets[] =  ':' . $key;
+            $sets1[] =  $key;
+            $data[':' . $key] = $value;
+        }
+        $db = new Db();
+        $sql = 'INSERT INTO ' . static::$table . '
+        (' . implode(',', $sets1) . ')' . ' 
+        VALUES ' . '(' .implode(',', $sets) . ')';
+        return $db->execute($sql, $data);
+    }
+
     //todo in future make method update, to update only this field, not all fields!!!
     public function update()
     {
@@ -53,5 +73,15 @@ abstract class Model
         SET ' . implode(',', $sets) . ' 
         WHERE id=:id';
         return $db->execute($sql, $data);
+    }
+
+    public function delete()
+    {
+
+        $db = new Db();
+        return $db->query('DELETE FROM ' .
+            static::$table .
+            ' WHERE id=:id',
+            [':id' => $this->id]);
     }
 }
