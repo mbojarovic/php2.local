@@ -4,7 +4,7 @@ return
     ['db' =>
         ['driver' => 'mysql',
             'host' => 'localhost',
-            'dbname' => 'php1',
+            'dbname' => 'php2',
             'username' => 'root',
             'pass' => ''],
     ];

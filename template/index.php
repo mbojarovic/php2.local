@@ -8,10 +8,8 @@
     <title>Php2, 1 урок</title>
 </head>
 <body>
-<?php //var_dump($data); ?>
 
 <?php foreach ($data as $article): ?>
-
     <h1><a href="/article.php?id=<?php echo $article->id; ?>"><?php echo $article->title; ?></a></h1>
 <article><?php echo $article->text; ?></article>
 
