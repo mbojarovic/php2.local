@@ -9,10 +9,9 @@ class Db
 
     public function __construct()
     {
-        $dsn = 'mysql:host=localhost;dbname=php2';
-        $user = 'root';
-        $password = '';
-        $this->dbh = new \PDO($dsn, $user, $password);
+        $config = new Config();
+        $dsn = $config->data['db']['driver'] . ':host=' . $config->data['db']['host'] . ';dbname=' . $config->data['db']['dbname'];
+        $this->dbh = new \Pdo($dsn, $config->data['db']['username'], $config->data['db']['pass']);
     }
 
     public function query($sql, $data = [], $class = null)

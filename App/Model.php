@@ -36,6 +36,7 @@ abstract class Model
         return (int)$db->query($sql, [], static::class)[0]->num;
     }
 
+    //todo in future make method update, to update only this field, not all fields!!!
     public function update()
     {
         $sets = [];
