@@ -75,9 +75,17 @@ abstract class Model
         return $db->execute($sql, $data);
     }
 
+    public function save()
+    {
+        if ($this->id == null) {
+            self::create();
+        } else {
+            self::update();
+        }
+    }
+
     public function delete()
     {
-
         $db = new Db();
         return $db->query('DELETE FROM ' .
             static::$table .
