@@ -1,4 +1,5 @@
 <?php
+
 require __DIR__ . '/autoload.php';
 
 isset($_GET['id']) ? $id = $_GET['id'] : $id = null;

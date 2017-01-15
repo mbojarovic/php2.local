@@ -11,13 +11,12 @@
 </head>
 <body>
 <div class="container-fluid">
-    <!-- Content here -->
-<?php foreach ($article as $articles): ?>
-    <h1><a href="/article.php?id=<?php echo $articles->id; ?>"><?php echo $articles->title; ?></a></h1>
-<article><?php echo $articles->text; ?></article>
+    <div class="alert alert-danger" role="alert">
+        <h4 class="top-name center-block text-center alert-heading">Well done!</h4>
+        <p class = "top-name center-block text-center">Your Article is</p>
+        <p class="mb-0 top-name center-block text-center">DELETED.</p>
+    </div>
 
-<?php endforeach ?>
-
-</div>
+    </div>
 </body>
 </html>

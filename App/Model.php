@@ -77,7 +77,7 @@ abstract class Model
 
     public function save()
     {
-        if ($this->id == null) {
+        if ($this->id === null) {
             self::create();
         } else {
             self::update();
