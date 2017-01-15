@@ -6,7 +6,7 @@ class Config
 {
     use Singleton;
 
-    public $data;
+    public $data = [];
 
     public function __construct()
     {
