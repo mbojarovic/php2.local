@@ -2,8 +2,21 @@
 
 require __DIR__ . '/autoload.php';
 
-$article = \App\Models\Article::findOneById(1);
+class mySingleton
+{
+    public $time;
 
-$article->title = 'Тестовый заголовок';
+    public function __construct()
+    {
+        $this->time = microtime(true);
+    }
+}
 
-$article->update();
+$obj = new mySingleton();
+echo $obj->time;
+
+echo '<br>';
+sleep(1);
+
+$obj = new mySingleton();
+echo $obj->time;

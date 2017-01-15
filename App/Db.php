@@ -8,7 +8,7 @@ class Db
 
     public function __construct()
     {
-        $config = new Config();
+        $config = Config::instance();
         $dsn = $config->data['db']['driver'] . ':host=' . $config->data['db']['host'] . ';dbname=' . $config->data['db']['dbname'];
         $this->dbh = new \Pdo($dsn, $config->data['db']['username'], $config->data['db']['pass']);
     }
