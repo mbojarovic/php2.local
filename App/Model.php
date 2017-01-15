@@ -52,7 +52,7 @@ abstract class Model
         $db = new Db();
         $sql = 'INSERT INTO ' . static::$table . '
         (' . implode(',', $sets1) . ')' . ' 
-        VALUES ' . '(' .implode(',', $sets) . ')';
+        VALUES ' . '(' . implode(',', $sets) . ')';
         return $db->execute($sql, $data);
     }
 
