@@ -12,7 +12,7 @@
 <body>
 <div class="container-fluid">
 
-    <?php if ($_POST == true) : ?>
+    <?php if (true == $_POST) : ?>
 
         <div class="alert alert-info" role = "alert" >
             <h4 class="top-name center-block text-center alert-heading" > Well done!</h4 >
@@ -20,7 +20,7 @@
             <p class="mb-0 top-name center-block text-center" > CREATED .</p >
         </div >
 
-    <?php endif; ?>
+<?php else : ?>
 
     <form method="post" action="/admin-news-create.php">
         <div class="form-group">
@@ -32,6 +32,7 @@
             <textarea class="form-control" rows="30" id="comment" name="text"></textarea>
 
             <input type="submit" value="Создать" class="btn btn-info">
+            <?php endif; ?>
         </div>
     </form>
 </div>

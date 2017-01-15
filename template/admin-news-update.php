@@ -12,7 +12,7 @@
 <body>
 <div class="container-fluid">
 
-    <?php if ($_POST == true) : ?>
+    <?php if (true == $_POST) : ?>
 
         <div class="alert alert-warning" role = "alert" >
         <h4 class="top-name center-block text-center alert-heading" > Well done!</h4 >
