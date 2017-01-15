@@ -20,7 +20,7 @@
         <p class="mb-0 top-name center-block text-center" > UPDATED .</p >
     </div >
 
-    <?php endif; ?>
+    <?php else: ?>
 
     <form method="post" action="/admin-news-update.php?id=<?php echo $article->id; ?>">
         <div class="form-group">
@@ -34,6 +34,9 @@
             <input type="submit" value="Изменить" class="btn btn-warning">
         </div>
     </form>
+
+    <?php endif; ?>
+
     </div>
 </body>
 </html>
