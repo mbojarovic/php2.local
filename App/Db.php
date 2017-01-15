@@ -33,7 +33,7 @@ class Db
         return $sth->execute($data);
     }
 
-    public function lastInsertId():int {
+    public function lastInsertId(): int {
         return $this->dbh->lastInsertId();
     }
 }
