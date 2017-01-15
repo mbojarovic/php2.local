@@ -53,7 +53,8 @@ abstract class Model
         $sql = 'INSERT INTO ' . static::$table . '
         (' . implode(',', $sets1) . ')' . ' 
         VALUES ' . '(' . implode(',', $sets) . ')';
-        return $db->execute($sql, $data);
+        $db->execute($sql, $data);
+        $this->id = (int)$db->lastInsertId();
     }
 
     //todo in future make method update, to update only this field, not all fields!!!
