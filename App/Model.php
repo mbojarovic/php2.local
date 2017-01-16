@@ -36,30 +36,43 @@ abstract class Model
         return (int)$db->query($sql, [], static::class)[0]->num;
     }
 
-    public function create()
+    public function isNew()
     {
-        $sets = [];
-        $sets1 = [];
+        return null === $this->id;
+    }
+
+    public function insert()
+    {
+        if (!$this->isNew()) {
+            return false;
+        }
+        $keys = [];
+        $vals = [];
         $data = [];
         foreach ($this as $key => $value) {
-           if ('id' == $key) {
+            if ('id' == $key) {
                 continue;
             }
-            $sets[] =  ':' . $key;
-            $sets1[] =  $key;
             $data[':' . $key] = $value;
+            $keys[] = $key;
+            $vals[] = ':' . $key;
         }
         $db = new Db();
         $sql = 'INSERT INTO ' . static::$table . '
-        (' . implode(',', $sets1) . ')' . ' 
-        VALUES ' . '(' . implode(',', $sets) . ')';
-        $db->execute($sql, $data);
-        $this->id = (int)$db->lastInsertId();
+         (' . implode(',', $keys) . ')
+         VALUES 
+         (' . implode(',', $vals) . ')';
+        $res = $db->execute($sql, $data);
+        $this->id = $db->lastInsertId();
+        return $res;
     }
 
     //todo in future make method update, to update only this field, not all fields!!!
     public function update()
     {
+        if ($this->isNew()) {
+            return false;
+        }
         $sets = [];
         $data = [];
         foreach ($this as $key => $value) {
@@ -76,21 +89,24 @@ abstract class Model
         return $db->execute($sql, $data);
     }
 
-    public function save()
-    {
-        if ($this->id === null) {
-            self::create();
-        } else {
-            self::update();
-        }
-    }
-
     public function delete()
     {
+        if ($this->isNew()) {
+            return false;
+        }
         $db = new Db();
         return $db->query('DELETE FROM ' .
             static::$table .
             ' WHERE id=:id',
             [':id' => $this->id]);
+    }
+
+    public function save()
+    {
+        if ($this->isNew()) {
+            $this->insert();
+        } else {
+            $this->update();
+        }
     }
 }

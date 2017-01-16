@@ -13,6 +13,7 @@
 <div class="container-fluid">
     <!-- Content here -->
 <?php foreach ($article as $articles): ?>
+
     <h1><a href="/article.php?id=<?php echo $articles->id; ?>"><?php echo $articles->title; ?></a></h1>
 <article><?php echo $articles->text; ?></article>
 

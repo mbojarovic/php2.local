@@ -6,9 +6,9 @@ class Config
 {
     use Singleton;
 
-    public $data = [];
+    public $data;
 
-    protected function __construct()
+    private function __construct()
     {
         $this->data = include(__DIR__ . '/../config.php');
     }
