@@ -31,8 +31,13 @@
             <label for="comment">Text:</label>
             <textarea class="form-control" rows="30" id="comment" name="text"></textarea>
 
+            <label for="comment">Author:</label>
+            <textarea class="form-control" rows="1" id="comment" name="author_id"></textarea>
+
             <input type="submit" value="Создать" class="btn btn-info">
+
             <?php endif; ?>
+
         </div>
     </form>
 </div>

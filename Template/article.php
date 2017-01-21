@@ -11,8 +11,17 @@
 </head>
 <body>
 <div class="container-fluid">
-    <h1><?php echo $article->title; ?></a></h1>
-    <article><?php echo $article->text; ?></article>
+
+    <article>
+
+        <h1><?php echo $article->title; ?></a></h1>
+        <?php echo $article->text; ?>
+
+        <?php if (isset($article->author)): ?>
+            <p>Автор: <?php echo $article->author->firstname; ?></p>
+        <?php endif; ?>
+
+    </article>
 </div>
 </body>
 </html>

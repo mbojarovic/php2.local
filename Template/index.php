@@ -12,13 +12,21 @@
 <body>
 <div class="container-fluid">
     <!-- Content here -->
-<?php foreach ($article as $articles): ?>
+<?php foreach ($news as $article): ?>
 
-    <h1><a href="/article.php?id=<?php echo $articles->id; ?>"><?php echo $articles->title; ?></a></h1>
-<article><?php echo $articles->text; ?></article>
+    <article>
+
+    <h1><a href="/article.php?id=<?php echo $article->id; ?>"><?php echo $article->title; ?></a></h1>
+    <?php echo $article->text; ?>
+
+    <?php if (isset($article->author)): ?>
+        <p>Автор: <?php echo $article->author->firstname; ?></p>
+    <?php endif; ?>
+
+</article>
 
 <?php endforeach ?>
-
+    <!-- Content end -->
 </div>
 </body>
 </html>

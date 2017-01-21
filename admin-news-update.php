@@ -7,14 +7,16 @@ if (isset($_GET['id'])) {
 } else {
     $id = null;
 }
-
-$article = \App\Models\Article::findOneById($id);
+$view = new \App\View();
+$view->article = \App\Models\Article::findOneById($id);
 
 if (isset($_POST['title']) && isset($_POST['text'])) {
     $title  = $_POST['title'];
     $text  = $_POST['text'];
 
+    $view->article = new \App\View();
     $article = \App\Models\Article::findOneById($id);
+
     $article->title = $title;
     $article->text = $text;
     $article->save();
@@ -26,4 +28,4 @@ if (isset($_POST['title']) && isset($_POST['text'])) {
     $text = null;
 }
 
-include __DIR__ . '/template/admin-news-update.php';
+echo $view->render(__DIR__ . '/Template/admin-news-update.php');

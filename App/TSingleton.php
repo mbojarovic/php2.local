@@ -2,7 +2,7 @@
 
 namespace App;
 
-trait Singleton
+trait TSingleton
 {
     public static function instance()
     {

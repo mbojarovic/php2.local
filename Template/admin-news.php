@@ -23,7 +23,7 @@
                 </thead>
                 <tbody>
 
-                <?php foreach ($articles as $article): ?>
+                <?php foreach ($news as $article): ?>
 
                     <tr>
                         <td align="center">

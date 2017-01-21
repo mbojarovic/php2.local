@@ -2,6 +2,8 @@
 
 require __DIR__ . '/autoload.php';
 
-$article = \App\Models\Article::findAll();
+$view = new \App\View();
 
-include __DIR__ . '/template/index.php';
+$view->news = \App\Models\Article::findAll();
+
+echo $view->render(__DIR__ . '/Template/index.php');
