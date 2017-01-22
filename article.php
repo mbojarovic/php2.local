@@ -8,4 +8,4 @@ $view = new \App\View();
 
 $view->article = \App\Models\Article::findOneById($id);
 
-echo $view->render(__DIR__ . '/Template/article.php');
+echo $view->render(__DIR__ . '/Templates/article.php');

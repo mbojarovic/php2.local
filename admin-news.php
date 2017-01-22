@@ -6,5 +6,5 @@ $view = new \App\View();
 
 $view->news = \App\Models\Article::findAll();
 
-echo $view->render(__DIR__ . '/Template/admin-news.php');
+echo $view->render(__DIR__ . '/Templates/admin-news.php');
 

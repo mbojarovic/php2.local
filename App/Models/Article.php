@@ -8,11 +8,24 @@ class Article
     extends Model
 {
 
+    /**
+     * @var string Should contain a table name
+     */
+
     public static $table = 'news';
+
+    /**
+     * @var
+     */
 
     public $title;
     public $text;
     public $author_id;
+
+    /**
+     * @param $key
+     * @return mixed
+     */
 
     public function __get($key)
     {
@@ -21,11 +34,15 @@ class Article
         }
     }
 
+    /**
+     * @param $key
+     * @return bool
+     */
+
     public function __isset($key)
     {
         if ('author' == $key && !empty($this->author_id)) {
             return true;
         }
     }
-
 }

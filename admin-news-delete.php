@@ -10,7 +10,7 @@ if (isset($_GET['id'])) {
     header('refresh: 2; url=/admin-news.php');
 
     $view = new \App\View();
-    echo $view->render(__DIR__ . '/Template/admin-news-delete.php');
+    echo $view->render(__DIR__ . '/Templates/admin-news-delete.php');
 
 } else {
     $id = null;

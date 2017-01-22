@@ -2,8 +2,15 @@
 
 require __DIR__ . '/autoload.php';
 
-$view = new \App\View();
+$parts = explode('/', $_SERVER['REQUEST_URI']);
+var_dump($parts);
+$controllerName = $parts[1] ?: 'Index';
+$actionName = $parts[2] ?: 'Default';
+$controllerClass = '\\App\\Controllers\\' . $controllerName;
 
-$view->news = \App\Models\Article::findAll();
+if (!class_exists($controllerClass)) {
+    die('Контроллер не найден');
+}
 
-echo $view->render(__DIR__ . '/Template/index.php');
+$controller = new $controllerClass;
+$controller->action($actionName);
