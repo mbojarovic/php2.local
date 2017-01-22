@@ -7,16 +7,14 @@ use App\Model;
 class Article
     extends Model
 {
-
     /**
-     * @var string Should contain a table name
+     * Class Article
+     * @package App\Models
+     *
+     * @property \App\Models\Author $author
      */
 
     public static $table = 'news';
-
-    /**
-     * @var
-     */
 
     public $title;
     public $text;

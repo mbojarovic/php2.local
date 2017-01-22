@@ -3,7 +3,7 @@
 require __DIR__ . '/autoload.php';
 
 $parts = explode('/', $_SERVER['REQUEST_URI']);
-var_dump($parts);
+//var_dump($parts);
 $controllerName = $parts[1] ?: 'Index';
 $actionName = $parts[2] ?: 'Default';
 $controllerClass = '\\App\\Controllers\\' . $controllerName;
