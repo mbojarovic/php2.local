@@ -11,16 +11,21 @@ abstract class Controller
         $this->view = new View();
     }
 
+    protected function beforeAction()
+    {}
+
     protected function access():bool
     {
         return true;
     }
 
-    public function action($name)
+    //method decorator
+    public function action(string $name)
     {
+        $this->beforeAction();
+        $actionName = 'action' . $name;
         if ($this->access()) {
-            $action = 'action' . $name;
-            $this->$action();
+            $this->$actionName();
         } else {
             die('Нет доступа');
         }

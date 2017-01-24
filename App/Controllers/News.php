@@ -5,15 +5,24 @@ namespace App\Controllers;
 use App\Controller;
 use App\Models\Article;
 
-class Index
+class News
     extends Controller
 {
 
-    public function actionDefault()
+    protected function beforeAction()
+    {
+    }
+
+    protected function access():bool
+    {
+        return true;
+    }
+
+    public function actionAll()
     {
         $this->view->news = Article::findAll();
         echo $this->view->render(
-            __DIR__ . '/../../Templates/index.php'
+            __DIR__ . '/../Templates/index.php'
         );
     }
 
@@ -21,7 +30,7 @@ class Index
     {
         $this->view->article = Article::findOneById($_GET['id']);
         echo $this->view->render(
-            __DIR__ . '/../../Templates/article.php'
+            __DIR__ . '/../Templates/article.php'
         );
     }
 

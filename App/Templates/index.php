@@ -16,7 +16,7 @@
 
     <article>
 
-    <h1><a href="/article.php?id=<?php echo $article->id; ?>"><?php echo $article->title; ?></a></h1>
+    <h1><a href="/news/one/?id=<?php echo $article->id; ?>"><?php echo $article->title; ?></a></h1>
     <?php echo $article->text; ?>
 
     <?php if (isset($article->author)): ?>

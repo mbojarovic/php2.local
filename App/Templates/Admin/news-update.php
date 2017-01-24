@@ -22,7 +22,7 @@
 
     <?php else: ?>
 
-    <form method="post" action="/admin-news-update.php?id=<?php echo $article->id; ?>">
+    <form method="post" action="/admin/update/?id=<?php echo $article->id; ?>">
         <div class="form-group">
 
             <label for="comment">Title:</label>

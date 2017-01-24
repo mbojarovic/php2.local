@@ -17,7 +17,7 @@
             <table class="table table-striped table-bordered table-list">
                 <thead>
                 <tr>
-                    <th><em class="fa fa-cog"><a class="btn btn-info" href="/admin-news-create.php">Create New Article<em class="fa fa-trash"></em></a></em></th>
+                    <th><em class="fa fa-cog"><a class="btn btn-info" href="/admin/create/">Create New Article<em class="fa fa-trash"></em></a></em></th>
                     <th>Title</th>
                 </tr>
                 </thead>
@@ -27,8 +27,8 @@
 
                     <tr>
                         <td align="center">
-                            <a class="btn btn-warning" href="/admin-news-update.php?id=<?php echo $article->id ?>">UPDATE<em class="fa fa-trash"></em></a>
-                            <a class="btn btn-danger" href="/admin-news-delete.php?id=<?php echo $article->id ?>">DELETE<em class="fa fa-trash"></em></a>
+                            <a class="btn btn-warning" href="/admin/update/?id=<?php echo $article->id ?>">UPDATE<em class="fa fa-trash"></em></a>
+                            <a class="btn btn-danger" href="/admin/delete/?id=<?php echo $article->id ?>">DELETE<em class="fa fa-trash"></em></a>
                         </td>
                         <td><?php echo $article->title; ?></td>
                     </tr>

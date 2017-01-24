@@ -22,7 +22,7 @@
 
 <?php else : ?>
 
-    <form method="post" action="/admin-news-create.php">
+    <form method="post" action="/admin/create/">
         <div class="form-group">
 
             <label for="comment">Title:</label>
