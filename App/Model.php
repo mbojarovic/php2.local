@@ -2,6 +2,9 @@
 
 namespace App;
 
+use App\Exception\DbException;
+use App\Exception\Error404Exception;
+
 abstract class Model
 {
 
@@ -9,24 +12,35 @@ abstract class Model
 
     public static function findAll()
     {
-            $db = db::instance();
-            $sql = 'SELECT * FROM1 ' . static::$table;
-            return $db->query($sql, [], static::class);
+        $db = db::instance();
+        $sql = 'SELECT * FROM ' . static::$table;
+        return $db->query($sql, [], static::class);
     }
 
     public static function findOneById(int $id)
     {
         $db = db::instance();
         $sql = 'SELECT * FROM ' . static::$table . ' WHERE id=:id';
-        return $db->query($sql,
-            ['id' => $id], static::class)[0];
+        $res = $db->query($sql, ['id' => $id], static::class);
+
+        $result = [];
+
+        foreach ($res as $value) {
+            $result = $value;
+        }
+
+        if (!empty($result)) {
+            return $result;
+        } else {
+            throw new Error404Exception('Ошибка 404 - не найдено');
+        }
     }
 
     public static function findRecords(int $limit = 3, int $offset = 0)
     {
         $db = db::instance();
         $sql = 'SELECT * FROM ' . static::$table . ' ORDER BY id DESC LIMIT ' . $offset . ', ' . $limit;
-        return $db->query($sql, [], static::class);
+        return $res =  $db->query($sql, [], static::class);
     }
 
     public static function countAll()

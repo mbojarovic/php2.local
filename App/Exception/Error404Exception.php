@@ -2,7 +2,7 @@
 
 namespace App\Exception;
 
-class DbException
+class Error404Exception
     extends \Exception
 {
 }

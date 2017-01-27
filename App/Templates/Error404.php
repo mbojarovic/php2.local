@@ -12,14 +12,14 @@
 <body>
 <div class="container-fluid">
 
-        <div class="alert alert-info" role = "alert" >
-            <h4 class="top-name center-block text-center alert-heading" ></h4 >
-            <p class = "top-name center-block text-center" ><?php echo 'Возникла ошибка: ' . $errors; ?></p >
-            <p class="mb-0 top-name center-block text-center" ></p >
-        </div >
+    <div class="bg-inverse text-white" role = "alert" >
+        <h4 class="top-name center-block text-center alert-heading" ></h4 >
+        <p class = "top-name center-block text-center" ><?php echo 'Возникла ошибка: ' . $errors; ?></p >
+        <p class="mb-0 top-name center-block text-center" ></p >
+    </div >
 
-        </div>
-    </form>
+</div>
+</form>
 </div>
 </body>
 </html>

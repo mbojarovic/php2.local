@@ -3,7 +3,7 @@
 require __DIR__ . '/autoload.php';
 
 $parts = explode('/', $_SERVER['REQUEST_URI'] . '/');
-var_dump($parts);
+//var_dump($parts);
 $controllerName = ucfirst($parts[1]) ?: 'News';
 
 if ($parts[1] == 'admin') {
@@ -12,7 +12,7 @@ if ($parts[1] == 'admin') {
 } else {
     $controllerClassName = '\\App\\Controllers\\' . $controllerName;
     $actionName = ucfirst($parts[2]) ?: 'All';
-    echo '222222';
+    //echo '222222';
 }
 
 if (!class_exists($controllerClassName)) {
@@ -28,12 +28,16 @@ if (!method_exists($controllerClassName, 'action' . $actionName)) {
 try  {
     $controller = new $controllerClassName;
     $controller->action($actionName);
-} catch (Exception $e) {
+
+} catch (\App\Exception\DbException $e) {
     $view = new \App\View();
     $view->errors = $e->getMessage();
-        echo $view->render(
-            __DIR__ . '/App/Templates/error.php');
-    //echo 'Возникла ошибка: ' . $e->getMessage();
+        echo $view->render(__DIR__ . '/App/Templates/error.php');
+
+} catch (\App\Exception\Error404Exception $e) {
+    $view = new \App\View();
+    $view->errors = $e->getMessage();
+    echo $view->render(__DIR__ . '/App/Templates/error404.php');
 }
 
 
