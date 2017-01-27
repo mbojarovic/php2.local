@@ -9,14 +9,14 @@ abstract class Model
 
     public static function findAll()
     {
-        $db = new Db();
-        $sql = 'SELECT * FROM ' . static::$table;
-        return $db->query($sql, [], static::class);
+            $db = db::instance();
+            $sql = 'SELECT * FROM1 ' . static::$table;
+            return $db->query($sql, [], static::class);
     }
 
     public static function findOneById(int $id)
     {
-        $db = new Db();
+        $db = db::instance();
         $sql = 'SELECT * FROM ' . static::$table . ' WHERE id=:id';
         return $db->query($sql,
             ['id' => $id], static::class)[0];
@@ -24,14 +24,14 @@ abstract class Model
 
     public static function findRecords(int $limit = 3, int $offset = 0)
     {
-        $db = new Db();
+        $db = db::instance();
         $sql = 'SELECT * FROM ' . static::$table . ' ORDER BY id DESC LIMIT ' . $offset . ', ' . $limit;
         return $db->query($sql, [], static::class);
     }
 
     public static function countAll()
     {
-        $db = new Db();
+        $db = db::instance();
         $sql = 'SELECT COUNT(*) AS num FROM ' . static::$table;
         return (int)$db->query($sql, [], static::class)[0]->num;
     }
@@ -57,7 +57,7 @@ abstract class Model
             $keys[] = $key;
             $vals[] = ':' . $key;
         }
-        $db = new Db();
+        $db = db::instance();
         $sql = 'INSERT INTO ' . static::$table . '
          (' . implode(',', $keys) . ')
          VALUES 
@@ -82,7 +82,7 @@ abstract class Model
             }
             $sets[] = $key . '=:' . $key;
         }
-        $db = new Db();
+        $db = db::instance();
         $sql = 'UPDATE ' . static::$table . ' 
         SET ' . implode(',', $sets) . ' 
         WHERE id=:id';
@@ -94,7 +94,7 @@ abstract class Model
         if ($this->isNew()) {
             return false;
         }
-        $db = new Db();
+        $db = db::instance();
         return $db->query('DELETE FROM ' .
             static::$table .
             ' WHERE id=:id',

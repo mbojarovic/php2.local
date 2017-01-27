@@ -2,15 +2,24 @@
 
 namespace App;
 
+use App\Exception\DbException;
+
 class Db
 {
+    use TSingleton;
+
     protected $dbh;
 
     public function __construct()
     {
         $config = Config::instance();
         $dsn = $config->data['db']['driver'] . ':host=' . $config->data['db']['host'] . ';dbname=' . $config->data['db']['dbname'];
-        $this->dbh = new \Pdo($dsn, $config->data['db']['username'], $config->data['db']['pass']);
+        try {
+            $this->dbh = new \Pdo($dsn, $config->data['db']['username'], $config->data['db']['pass']);
+        } catch (\PDOException $e) {
+            throw new DbException($e->getMessage());
+
+        }
     }
 
     public function query($sql, $data = [], $class = null)
@@ -18,7 +27,7 @@ class Db
         $sth = $this->dbh->prepare($sql);
         $res = $sth->execute($data);
         if (false === $res) {
-            die('DB error in ' . $sql);
+            throw new DbException('DB error in ' . $sql);
         }
         if (null === $class) {
             return $sth->fetchAll();

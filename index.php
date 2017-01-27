@@ -4,25 +4,62 @@ require __DIR__ . '/autoload.php';
 
 $parts = explode('/', $_SERVER['REQUEST_URI'] . '/');
 var_dump($parts);
-//var_dump($parts);
-
 $controllerName = ucfirst($parts[1]) ?: 'News';
-//echo $controllerName;
-$controllerClassName = '\\App\\Controllers\\' . $controllerName;
+
+if ($parts[1] == 'admin') {
+    $controllerClassName = '\\App\\Controllers\\Admin\\' . $controllerName;
+    $actionName = ucfirst($parts[2]) ?: 'All';
+} else {
+    $controllerClassName = '\\App\\Controllers\\' . $controllerName;
+    $actionName = ucfirst($parts[2]) ?: 'All';
+    echo '222222';
+}
 
 if (!class_exists($controllerClassName)) {
     die('Class ERROR 404');
 }
 
-$actionName = ucfirst($parts[2]) ?: 'All';
-//echo $actionName;
-
 if (!method_exists($controllerClassName, 'action' . $actionName)) {
     die('Action ERROR 404');
 }
+
 //todo придумать свой роутинг
-$controller = new $controllerClassName;
-$controller->action($actionName);
+
+try  {
+    $controller = new $controllerClassName;
+    $controller->action($actionName);
+} catch (Exception $e) {
+    $view = new \App\View();
+    $view->errors = $e->getMessage();
+        echo $view->render(
+            __DIR__ . '/App/Templates/error.php');
+    //echo 'Возникла ошибка: ' . $e->getMessage();
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //old code. DO NOT READ!
 /*$controllerName = $_GET['ctrl'] ?? 'News';

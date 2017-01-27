@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Controllers\Admin;
 
 use App\Controller;
 use App\Models\Article;
@@ -13,7 +13,7 @@ class Admin
     {
     }
 
-    protected function access():bool
+    protected function access(): bool
     {
         return true;
     }
@@ -22,16 +22,13 @@ class Admin
     {
         $this->view->news = Article::findAll();
         echo $this->view->render(
-            __DIR__ . '/../Templates/Admin/news.php'
+            __DIR__ . '/../../Templates/Admin/news.php'
         );
     }
 
     public function actionOne()
     {
         $this->view->article = Article::findOneById($_GET['id']);
-        echo $this->view->render(
-            __DIR__ . '/../Templates/Admin/article.php'
-        );
     }
 
     public function actionCreate()
@@ -55,7 +52,7 @@ class Admin
         }
 
         $view = new \App\View();
-        echo $view->render(__DIR__ . '/../Templates/Admin/news-create.php');
+        echo $view->render(__DIR__ . '/../../Templates/Admin/news-create.php');
     }
 
     public function actionUpdate()
@@ -88,7 +85,7 @@ class Admin
             $text = null;
         }
 
-        echo $view->render(__DIR__ . '/../Templates/Admin/news-update.php');
+        echo $view->render(__DIR__ . '/../../Templates/Admin/news-update.php');
     }
 
     public function actionDelete()
@@ -101,7 +98,7 @@ class Admin
             header('refresh: 2; url=/admin/');
 
             $view = new \App\View();
-            echo $view->render(__DIR__ . '/../Templates/Admin/news-delete.php');
+            echo $view->render(__DIR__ . '/../../Templates/Admin/news-delete.php');
 
         } else {
             $id = null;

@@ -5,6 +5,13 @@ class View
 {
     use TMagicGetSetIsset;
 
+    public function display($template) {
+        foreach ($this->data as $key => $value) {
+            $$key = $value;
+        }
+
+        include $template;
+    }
     public function render($template)
     {
         foreach ($this->data as $key => $value) {

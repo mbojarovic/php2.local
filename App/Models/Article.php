@@ -10,33 +10,27 @@ class Article
     /**
      * Class Article
      * @package App\Models
-     *
      * @property \App\Models\Author $author
      */
-
     public static $table = 'news';
 
     public $title;
     public $text;
     public $author_id;
-
     /**
      * @param $key
      * @return mixed
      */
-
     public function __get($key)
     {
         if ('author' == $key) {
             return Author::findOneById($this->author_id);
         }
     }
-
     /**
      * @param $key
      * @return bool
      */
-
     public function __isset($key)
     {
         if ('author' == $key && !empty($this->author_id)) {
