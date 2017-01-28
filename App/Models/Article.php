@@ -7,6 +7,7 @@ use App\Model;
 class Article
     extends Model
 {
+
     /**
      * Class Article
      * @package App\Models
@@ -17,6 +18,7 @@ class Article
     public $title;
     public $text;
     public $author_id;
+
     /**
      * @param $key
      * @return mixed
@@ -27,6 +29,7 @@ class Article
             return Author::findOneById($this->author_id);
         }
     }
+
     /**
      * @param $key
      * @return bool

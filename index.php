@@ -29,12 +29,12 @@ try  {
     $controller = new $controllerClassName;
     $controller->action($actionName);
 
-} catch (\App\Exception\DbException $e) {
+} catch (\App\Exceptions\DbException $e) {
     $view = new \App\View();
     $view->errors = $e->getMessage();
         echo $view->render(__DIR__ . '/App/Templates/error.php');
 
-} catch (\App\Exception\Error404Exception $e) {
+} catch (\App\Exceptions\Error404Exception $e) {
     $view = new \App\View();
     $view->errors = $e->getMessage();
     echo $view->render(__DIR__ . '/App/Templates/error404.php');

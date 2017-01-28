@@ -2,9 +2,6 @@
 
 namespace App;
 
-use App\Exception\DbException;
-use App\Exception\Error404Exception;
-
 abstract class Model
 {
 
@@ -28,12 +25,7 @@ abstract class Model
         foreach ($res as $value) {
             $result = $value;
         }
-
-        if (!empty($result)) {
             return $result;
-        } else {
-            throw new Error404Exception('Ошибка 404 - не найдено');
-        }
     }
 
     public static function findRecords(int $limit = 3, int $offset = 0)
@@ -122,5 +114,10 @@ abstract class Model
         } else {
             $this->update();
         }
+    }
+
+    public function fill(array $data)
+    {
+
     }
 }

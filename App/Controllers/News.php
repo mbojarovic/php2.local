@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Controller;
 use App\Models\Article;
+use App\Exceptions\Error404Exception;
 
 class News
     extends Controller
@@ -29,9 +30,11 @@ class News
     public function actionOne()
     {
         $this->view->article = Article::findOneById($_GET['id']);
-        echo $this->view->render(
-            __DIR__ . '/../Templates/article.php'
-        );
-    }
 
+        if (!empty($this->view->article)) {
+            echo $this->view->render(__DIR__ . '/../Templates/article.php' );
+        } else {
+            throw new Error404Exception('Ошибка 404 - не найдено');
+        }
+    }
 }
