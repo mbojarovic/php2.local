@@ -12,7 +12,6 @@ if ($parts[1] == 'admin') {
 } else {
     $controllerClassName = '\\App\\Controllers\\' . $controllerName;
     $actionName = ucfirst($parts[2]) ?: 'All';
-    //echo '222222';
 }
 
 if (!class_exists($controllerClassName)) {

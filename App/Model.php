@@ -116,8 +116,8 @@ abstract class Model
         }
     }
 
+//todo create method fill
     public function fill(array $data)
     {
-
     }
 }
