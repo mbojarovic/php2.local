@@ -4,12 +4,14 @@ namespace App;
 
 trait TSingleton
 {
+    protected static $instance;
+
     public static function instance()
     {
-        static $instance = null;
-        if (null === $instance) {
-            $instance = new static();
+        if (null === static::$instance) {
+            static::$instance = new static;
         }
-        return $instance;
+        return static::$instance;
     }
+
 }
