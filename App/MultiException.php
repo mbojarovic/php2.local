@@ -4,7 +4,7 @@ namespace App;
 
 class MultiException
     extends \Exception
-    implements \Iterator
+        implements \Iterator
 {
     protected $collection = [];
 

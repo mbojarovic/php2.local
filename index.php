@@ -2,31 +2,31 @@
 
 use \App\Models\Logger;
 use \App\Models\LoggerText;
-
+use \App\Exceptions\Error404Exception;
 require __DIR__ . '/autoload.php';
 
 $parts = explode('/', $_SERVER['REQUEST_URI'] . '/');
 $controllerName = ucfirst($parts[1]) ?: 'News';
+    if ($parts[1] == 'admin') {
+        $controllerClassName = '\\App\\Controllers\\Admin\\' . $controllerName;
+        $actionName = ucfirst($parts[2]) ?: 'All';
+    } else {
+        $controllerClassName = '\\App\\Controllers\\' . $controllerName;
+        $actionName = ucfirst($parts[2]) ?: 'All';
+    }
 
-if ($parts[1] == 'admin') {
-    $controllerClassName = '\\App\\Controllers\\Admin\\' . $controllerName;
-    $actionName = ucfirst($parts[2]) ?: 'All';
-} else {
-    $controllerClassName = '\\App\\Controllers\\' . $controllerName;
-    $actionName = ucfirst($parts[2]) ?: 'All';
-}
-
-if (!class_exists($controllerClassName)) {
-    die('Class ERROR 404');
-}
-
-if (!method_exists($controllerClassName, 'action' . $actionName)) {
-    die('Action ERROR 404');
-}
 
 //todo придумать свой роутинг
 
 try  {
+    if (!class_exists($controllerClassName)) {
+        throw new \App\Exceptions\Error404Exception('Ошибка 404 - class не найден');
+    }
+
+    if (!method_exists($controllerClassName, 'action' . $actionName)) {
+        throw new \App\Exceptions\Error404Exception('Ошибка 404 - method не найден');
+    }
+
     $controller = new $controllerClassName;
     $controller->action($actionName);
 
@@ -39,18 +39,15 @@ try  {
     $view = new \App\View();
     $view->errors = $e->getMessage();
     echo $view->render(__DIR__ . '/App/Templates/error404.php');
+
+} finally {
+    if (isset($e)) {
+        $log = new Logger(__DIR__ . '/log.txt');
+        $loggertext = new LoggerText($e->getMessage());
+        $log->append($loggertext);
+        $log->save($_SERVER['REQUEST_URI']);
+    }
 }
-
-if (isset($e)) {
-    $log = new Logger(__DIR__ . '/log.txt');
-    $loggertext = new LoggerText($e->getMessage());
-    $log->append($loggertext);
-    $log->save($_SERVER['REQUEST_URI']);
-}
-
-
-
-
 
 
 

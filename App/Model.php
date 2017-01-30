@@ -4,7 +4,6 @@ namespace App;
 
 abstract class Model
 {
-
     public $id;
 
     public static function findAll()
