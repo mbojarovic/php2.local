@@ -119,5 +119,12 @@ abstract class Model
 //todo create method fill
     public function fill(array $data)
     {
+        foreach ($data as $key => $value) {
+            if ('id' === $key) {
+                continue;
+            }
+            $this->$key = $data[$key];
+        }
+        return $this;
     }
 }

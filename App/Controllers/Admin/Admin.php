@@ -33,15 +33,16 @@ class Admin
 
     public function actionCreate()
     {
-        if (isset($_POST['title']) && isset($_POST['text'])) {
+        if (isset($_POST['title']) && isset($_POST['text']) && isset($_POST['author_id'])) {
             $title  = $_POST['title'];
             $text  = $_POST['text'];
             $author_id = $_POST['author_id'];
 
             $article = new \App\Models\Article();
-            $article->title = $title;
+            $article->fill($_POST);
+/*          $article->title = $title;
             $article->text = $text;
-            $article->author_id = $_POST['author_id'];
+            $article->author_id = $_POST['author_id'];*/
             $article->save();
             header('refresh: 2; url=/admin/');
 
@@ -72,10 +73,10 @@ class Admin
 
             $view->article = new \App\View();
             $article = \App\Models\Article::findOneById($id);
-
-            $article->title = $title;
+            $article->fill($_POST);
+           /* $article->title = $title;
             $article->text = $text;
-            $article->author_id = $author_id;
+            $article->author_id = $author_id;*/
             $article->save();
 
             header('refresh: 2; url=/admin/');

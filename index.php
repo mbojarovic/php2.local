@@ -2,10 +2,10 @@
 
 use \App\Models\Logger;
 use \App\Models\LoggerText;
+
 require __DIR__ . '/autoload.php';
 
 $parts = explode('/', $_SERVER['REQUEST_URI'] . '/');
-//var_dump($parts);
 $controllerName = ucfirst($parts[1]) ?: 'News';
 
 if ($parts[1] == 'admin') {
