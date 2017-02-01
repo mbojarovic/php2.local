@@ -34,18 +34,16 @@ class Admin
     public function actionCreate()
     {
         if (isset($_POST['title']) && isset($_POST['text']) && isset($_POST['author_id'])) {
-            $title  = $_POST['title'];
-            $text  = $_POST['text'];
-            $author_id = $_POST['author_id'];
-
-            $article = new \App\Models\Article();
-            $article->fill($_POST);
-/*          $article->title = $title;
-            $article->text = $text;
-            $article->author_id = $_POST['author_id'];*/
-            $article->save();
-            header('refresh: 2; url=/admin/');
-
+            try {
+                $article = new \App\Models\Article();
+                $article->fill($_POST);
+                $article->save();
+                header('refresh: 2; url=/admin/');
+            } catch (\App\MultiException $errors) {
+                foreach ($errors as $error) {
+                    echo $error->getMessage();
+                }
+            }
         } else {
             $title = null;
             $text = null;
@@ -67,16 +65,9 @@ class Admin
         $view->article = \App\Models\Article::findOneById($id);
 
         if (isset($_POST['title']) && isset($_POST['text'])) {
-            $title  = $_POST['title'];
-            $text  = $_POST['text'];
-            $author_id = $_POST['author_id'];
-
             $view->article = new \App\View();
             $article = \App\Models\Article::findOneById($id);
             $article->fill($_POST);
-           /* $article->title = $title;
-            $article->text = $text;
-            $article->author_id = $author_id;*/
             $article->save();
 
             header('refresh: 2; url=/admin/');
@@ -105,5 +96,4 @@ class Admin
             $id = null;
         }
     }
-
 }

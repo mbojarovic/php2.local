@@ -24,14 +24,14 @@ abstract class Model
         foreach ($res as $value) {
             $result = $value;
         }
-            return $result;
+        return $result;
     }
 
     public static function findRecords(int $limit = 3, int $offset = 0)
     {
         $db = db::instance();
         $sql = 'SELECT * FROM ' . static::$table . ' ORDER BY id DESC LIMIT ' . $offset . ', ' . $limit;
-        return $res =  $db->query($sql, [], static::class);
+        return $res = $db->query($sql, [], static::class);
     }
 
     public static function countAll()
@@ -118,12 +118,31 @@ abstract class Model
 //todo create method fill
     public function fill(array $data)
     {
+        $errors = new MultiException();
+
         foreach ($data as $key => $value) {
-            if ('id' === $key) {
-                continue;
+            //$key = 'title'
+            //$validator = 'validateTitle'
+            $validator = 'validate' . ucfirst($key);
+            if (method_exists($this, $validator)) {
+                $res = $this->$validator($value);
+                if (false === $res) {
+                    $errors->add(new \Exception('Invalid ' . $key));
+                }
             }
-            $this->$key = $data[$key];
+
+/*            if (empty($value)) {
+                $errors->add(new \Exception('Empty ' . $key));
+            }*/
+
+            /*            if ('id' === $key) {
+                            continue;
+                        }*/
+
+            $this->$key = $value;
         }
-        return $this;
+        if (!$errors->isEmpty()) {
+            throw $errors;
+        }
     }
 }

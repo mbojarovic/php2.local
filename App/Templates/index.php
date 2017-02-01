@@ -12,21 +12,22 @@
 <body>
 <div class="container-fluid">
     <!-- Content here -->
-<?php foreach ($news as $article): ?>
+    {% for news in article %}
 
     <article>
 
-    <h1><a href="/news/one/?id=<?php echo $article->id; ?>"><?php echo $article->title; ?></a></h1>
-    <?php echo $article->text; ?>
-
-    <?php if (isset($article->author)): ?>
-        <p>Автор: <?php echo $article->author->firstname; ?></p>
-    <?php endif; ?>
+    <h1><a href="/news/one/?id={{news.id}}">{{news.title}}</a></h1>
+    {{news.text}}
+        {% if news.author is defined %}
+        <p>Автор: {{news.author.firstname}}</p>
+        {% endif %}
 
 </article>
 
-<?php endforeach ?>
+    {% endfor %}
     <!-- Content end -->
 </div>
+<div class="panel-footer">Copyright &copy {{ post.published_at|date("Y") }} || Load{{timer}}</div>
+{{news.id}}
 </body>
 </html>

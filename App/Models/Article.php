@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Model;
+use App\MultiException;
 
 class Article
     extends Model
@@ -18,6 +19,26 @@ class Article
     public $title;
     public $text;
     public $author_id;
+
+//todo for if rules
+    protected function validateTitle($value) {
+
+        if (strlen($value) <= 3) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    protected function validateText($value) {
+
+        if (strlen($value) <= 3) {
+            return false;
+            //throw new \Exception('validate text plzz');
+        } else {
+            return true;
+        }
+    }
 
     /**
      * @param $key

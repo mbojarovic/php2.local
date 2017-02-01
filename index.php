@@ -2,7 +2,6 @@
 
 use \App\Models\Logger;
 use \App\Models\LoggerText;
-use \App\Exceptions\Error404Exception;
 require __DIR__ . '/autoload.php';
 
 $parts = explode('/', $_SERVER['REQUEST_URI'] . '/');
@@ -33,12 +32,12 @@ try  {
 } catch (\App\Exceptions\DbException $e) {
     $view = new \App\View();
     $view->errors = $e->getMessage();
-        echo $view->render(__DIR__ . '/App/Templates/error.php');
+        echo $view->render(__DIR__ . '/App/Templates/dberror.php');
 
 } catch (\App\Exceptions\Error404Exception $e) {
     $view = new \App\View();
     $view->errors = $e->getMessage();
-    echo $view->render(__DIR__ . '/App/Templates/error404.php');
+    echo $view->render(__DIR__ . '/App/Templates/404error.php');
 
 } finally {
     if (isset($e)) {
@@ -48,7 +47,6 @@ try  {
         $log->save($_SERVER['REQUEST_URI']);
     }
 }
-
 
 
 

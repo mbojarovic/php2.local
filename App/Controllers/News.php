@@ -21,10 +21,29 @@ class News
 
     public function actionAll()
     {
+/*        $timer = new \PHP_Timer();
+        \PHP_Timer::start();
+        $timer->start();
+
         $this->view->news = Article::findAll();
+
+        $time = \PHP_Timer::stop();
+        $this->view->timer = \PHP_Timer::resourceUsage();
         echo $this->view->render(
             __DIR__ . '/../Templates/index.php'
-        );
+        );*/
+
+     $timer = new \PHP_Timer();
+        \PHP_Timer::start();
+        $timer->start();
+
+        $loader = new \Twig_Loader_Filesystem('App/Templates');
+        $twig = new \Twig_Environment($loader, array());
+        echo $twig->render('index.php', array(
+            'article' => Article::findAll(),
+            'timer' => \PHP_Timer::resourceUsage(),
+        ));
+        $time = \PHP_Timer::stop();
     }
 
     public function actionOne()
