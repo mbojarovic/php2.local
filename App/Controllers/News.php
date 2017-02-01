@@ -21,18 +21,6 @@ class News
 
     public function actionAll()
     {
-/*        $timer = new \PHP_Timer();
-        \PHP_Timer::start();
-        $timer->start();
-
-        $this->view->news = Article::findAll();
-
-        $time = \PHP_Timer::stop();
-        $this->view->timer = \PHP_Timer::resourceUsage();
-        echo $this->view->render(
-            __DIR__ . '/../Templates/index.php'
-        );*/
-
      $timer = new \PHP_Timer();
         \PHP_Timer::start();
         $timer->start();
