@@ -38,7 +38,7 @@ class News
     {
         $this->view->article = Article::findOneById($_GET['id']);
 
-        if (false === empty($this->view->article)) {
+        if (!empty($this->view->article)) {
             echo $this->view->render(__DIR__ . '/../Templates/article.php' );
         } else {
             throw new Error404Exception('Ошибка 404 - не найдено');
